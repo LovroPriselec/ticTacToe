@@ -1,30 +1,118 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include "search.h"
 
-_Bool searchRow(int *array)
+int searchRow(char *array)
 {
-    int res = 0;
-}
-
-_Bool searchColumn(int *array)
-{
-    int res = 0;
-}
-
-_Bool searchDiagonal(int *array)
-{
-    int res = 0;
-}
-
-_Bool search(int *array)
-{
-    if (searchDiagonal(&array) && searchColumn(&array) && searchRow(&array))
+    int resO = 0, resX = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        resO = 0, resX = 0;
+        for (int j = 0; j < 3; j++)
+        {
+            printf("----%c----\n", *(array + 3 * j + i));
+            if (*(array + 3 * j + i) == 'O')
+            {
+                resO += 1;
+            }
+            if (*(array + 3 * j + i) == 'X')
+            {
+                resX += 1;
+            }
+        }
+    }
+    if (resO == 3)
+    {
+        return 0;
+    }
+    else if (resX == 3)
     {
         return 1;
     }
     else
     {
+        return -1;
+    }
+}
+
+int searchColumn(char *array)
+{
+    int resO = 0, resX = 0;
+    for (int j = 0; j < 3; j++)
+    {
+        resO = 0, resX = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            if (*(array + 3 * j + i) == 'O')
+            {
+                resO += 1;
+            }
+            if (*(array + 3 * j + i) == 'X')
+            {
+                resX += 1;
+            }
+        }
+    }
+    if (resO == 3)
+    {
         return 0;
+    }
+    else if (resX == 3)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int searchDiagonal(char *array)
+{
+    int resO = 0, resX = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        resO = 0, resX = 0;
+        for (int j = 0; j < 3; j++)
+        {
+            if (i == j || i == 3 - j - 1)
+            {
+                if (*(array + 3 * j + i) == 'O')
+                {
+                    resO += 1;
+                }
+                if (*(array + 3 * j + i) == 'X')
+                {
+                    resX += 1;
+                }
+            }
+        }
+    }
+    if (resO == 3)
+    {
+        return 0;
+    }
+    else if (resX == 3)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int search(char *array)
+{
+    if (searchDiagonal(array) == 0 || searchColumn(array) == 0 || searchRow(array) == 0)
+    {
+        return 0;
+    }
+    else if (searchDiagonal(array) == 1 || searchColumn(array) == 1 || searchRow(array) == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
     }
 }

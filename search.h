@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-_Bool searchRow(int *array);
-_Bool searchColumn(int *array);
-_Bool searchDiagonal(int *array);
-_Bool search(int *array);
+int searchRow(char *array);
+int searchColumn(char *array);
+int searchDiagonal(char *array);
+int search(char *array);
